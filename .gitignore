@@ -9,12 +9,12 @@
 **/config.yml
 **/config.yaml
 
-# Temporary scripts
-test_*
-fix_*
-check_*
-create_*
-debug_*
+# Temporary scripts (do not ignore unit tests or the fabqc package)
+/test_*
+/fix_*
+/check_*
+/create_*
+/debug_*
 
 # Project-specific directories
 backend/plans
@@ -23,8 +23,11 @@ archive/
 for-other-content/
 .logs/
 
-# Project-specific documentation
-*_*.md
+# Generated evaluation data
+data/generated/
+.venv-fabqc/
+*.pt
+fabqc.egg-info/
 
 # ============================================
 # PYTHON

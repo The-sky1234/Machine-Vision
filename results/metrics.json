@@ -1,0 +1,88 @@
+{
+  "seed": 7,
+  "disclaimer": "Telemetry and the defect-to-fault mapping are synthetic. These numbers describe the constructed line, not a real factory.",
+  "attribution": {
+    "seed": 7,
+    "n_lots": 124,
+    "n_defective_wafers": 584,
+    "summary": {
+      "n_cases": 584,
+      "n_decided": 445,
+      "n_abstain": 139,
+      "n_correct": 434,
+      "n_wrong": 11,
+      "accuracy_among_decided": 0.9752808988764045,
+      "abstain_rate": 0.238013698630137,
+      "correct_on_single_cause": 0.9194915254237288,
+      "missed_single_cause": 0.08050847457627118,
+      "wrong_cause_on_single": 0.0,
+      "abstain_on_ambiguous": 0.8854166666666666,
+      "abstain_on_unexplained": 1.0,
+      "false_attribution_unexplained": 0.0
+    },
+    "by_scenario": {
+      "ambiguous_scratch": {
+        "n": 96,
+        "accuracy": 0.8854166666666666,
+        "abstain_rate": 0.8854166666666666
+      },
+      "coolant_drift": {
+        "n": 108,
+        "accuracy": 0.9074074074074074,
+        "abstain_rate": 0.09259259259259259
+      },
+      "distractor_pressure_on_scratch": {
+        "n": 72,
+        "accuracy": 0.7638888888888888,
+        "abstain_rate": 0.2361111111111111
+      },
+      "pressure_oscillation": {
+        "n": 103,
+        "accuracy": 0.912621359223301,
+        "abstain_rate": 0.08737864077669903
+      },
+      "rpm_drop": {
+        "n": 93,
+        "accuracy": 0.989247311827957,
+        "abstain_rate": 0.010752688172043012
+      },
+      "temp_spike": {
+        "n": 96,
+        "accuracy": 0.9895833333333334,
+        "abstain_rate": 0.010416666666666666
+      },
+      "unexplained_scratch": {
+        "n": 16,
+        "accuracy": 1.0,
+        "abstain_rate": 1.0
+      }
+    },
+    "disclaimer": "Telemetry and the defect-to-fault mapping are synthetic. These numbers describe the constructed line, not a real factory."
+  },
+  "vision": {
+    "seed": 7,
+    "n_train_good": 48,
+    "n_test_good": 32,
+    "n_test_defect": 32,
+    "threshold_p90_on_holdout_good": 0.44767390489578246,
+    "auroc": 1.0,
+    "tpr": 1.0,
+    "fpr": 0.03125,
+    "mean_score_good": 0.4070048900321126,
+    "mean_score_defect": 0.7878708839416504,
+    "disclaimer": "Images are synthetic textures, not MVTec and not factory photos. AUROC is for this generator only."
+  },
+  "pipeline": {
+    "n_wafers": 256,
+    "vision_tpr": 1.0,
+    "vision_fpr": 0.0794392523364486,
+    "attribution_correct_given_detected_defect": 0.8809523809523809,
+    "n_detected_defects": 42,
+    "disclaimer": "Same synthetic generator as the standalone evals. Vision AUROC/TPR on painted defects is not an industrial claim."
+  },
+  "example_lots": {
+    "coolant_drift": "LOT0000",
+    "ambiguous_scratch": "LOT0084",
+    "unexplained_scratch": "LOT0100"
+  }
+}
