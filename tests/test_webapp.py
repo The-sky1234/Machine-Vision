@@ -1,4 +1,7 @@
+import io
+
 from fastapi.testclient import TestClient
+from PIL import Image
 
 from fabqc.webapp import app
 
@@ -30,3 +33,20 @@ def test_run_coolant_and_approve():
             )
             assert dec.status_code == 200
             assert dec.json()["status"] == "approved"
+
+
+def test_real_yolo_endpoint_accepts_image():
+    buf = io.BytesIO()
+    Image.new("RGB", (200, 200), "gray").save(buf, format="PNG")
+    with TestClient(app) as client:
+        status = client.get("/api/yolo/status")
+        assert status.status_code == 200
+        assert status.json()["available"] is True
+        result = client.post(
+            "/api/yolo/detect",
+            files={"image": ("steel.png", buf.getvalue(), "image/png")},
+        )
+        assert result.status_code == 200
+        body = result.json()
+        assert body["model"].startswith("YOLO11n")
+        assert body["annotated_image"].startswith("data:image/png;base64,")

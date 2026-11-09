@@ -7,6 +7,10 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 data/generated/
+data/raw/
+data/processed/
+runs/
 *.pt
+!models/*.pt
 .env
 .DS_Store

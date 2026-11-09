@@ -3,17 +3,22 @@
 from __future__ import annotations
 
 import threading
+from io import BytesIO
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel, Field
 
 from fabqc.labels import SCENARIO_OPTIONS
 from fabqc.simulator.line import SCENARIOS
 from fabqc.station import decide_action, ensure_model, get_run, inspect_lot, serialize_run
+from fabqc.vision.overlay import png_data_url
+from fabqc.yolo.detector import detect as yolo_detect
+from fabqc.yolo.detector import model_available
 
 WEB = Path(__file__).resolve().parent / "web"
 _run_lock = threading.Lock()
@@ -47,6 +52,52 @@ def scenarios() -> dict:
     return {
         "disclaimer": "这是模拟产线的样本数据，不是真实工厂。",
         "scenarios": [{"id": k, "label": v} for k, v in SCENARIO_OPTIONS],
+    }
+
+
+@app.get("/api/yolo/status")
+def yolo_status() -> dict:
+    return {
+        "available": model_available(),
+        "model": "YOLO11n",
+        "dataset": "NEU-DET：1800 张真实热轧钢表面照片，6 类缺陷",
+        "classes": ["龟裂", "夹杂物", "斑块", "点蚀", "压入氧化皮", "划痕"],
+    }
+
+
+@app.post("/api/yolo/detect")
+async def detect_real_surface(image: UploadFile = File(...)) -> dict:
+    if not model_available():
+        raise HTTPException(status_code=503, detail="YOLO model is not installed")
+    if image.content_type not in {"image/jpeg", "image/png", "image/webp"}:
+        raise HTTPException(status_code=415, detail="upload JPEG, PNG, or WebP")
+    raw = await image.read(8 * 1024 * 1024 + 1)
+    if len(raw) > 8 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail="image exceeds 8 MB")
+    try:
+        loaded = Image.open(BytesIO(raw))
+        loaded.load()
+    except (UnidentifiedImageError, OSError):
+        raise HTTPException(status_code=400, detail="invalid image") from None
+    if loaded.width * loaded.height > 16_000_000:
+        raise HTTPException(status_code=413, detail="image dimensions too large")
+    result = yolo_detect(loaded)
+    return {
+        "model": "YOLO11n fine-tuned on NEU-DET",
+        "inference_ms": result.inference_ms,
+        "count": len(result.detections),
+        "detections": [
+            {
+                "class_id": d.class_id,
+                "class_name": d.class_name,
+                "class_name_zh": d.class_name_zh,
+                "confidence": d.confidence,
+                "box_xyxy": d.box_xyxy,
+            }
+            for d in result.detections
+        ],
+        "annotated_image": png_data_url(result.annotated_rgb),
+        "notice": "YOLO 只负责检测钢材表面缺陷；没有设备时序时不会猜根因。",
     }
 
 

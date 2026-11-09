@@ -10,6 +10,56 @@ const SIGNAL_LABEL = {
 let current = null;
 let selectedId = null;
 
+async function loadYoloStatus() {
+  const res = await fetch("/api/yolo/status");
+  const data = await res.json();
+  $("yolo-run").disabled = !data.available;
+  $("yolo-status").textContent = data.available
+    ? `${data.model} 已就绪；训练数据：${data.dataset}`
+    : "模型权重还没有放到 models/neudet_yolo11n.pt";
+}
+
+async function runYolo() {
+  const file = $("yolo-file").files[0];
+  if (!file) {
+    $("yolo-status").textContent = "请先选择一张钢材表面图片。";
+    return;
+  }
+  const button = $("yolo-run");
+  button.disabled = true;
+  $("yolo-status").textContent = "YOLO 正在检查…";
+  const form = new FormData();
+  form.append("image", file);
+  try {
+    const res = await fetch("/api/yolo/detect", { method: "POST", body: form });
+    if (!res.ok) throw new Error((await res.json()).detail || "检测失败");
+    const data = await res.json();
+    $("yolo-image").src = data.annotated_image;
+    const rows = data.detections.length
+      ? data.detections
+          .map(
+            (d) =>
+              `<div class="detection-row"><b>${escapeHtml(d.class_name_zh)}</b><span>${(
+                d.confidence * 100
+              ).toFixed(1)}%</span></div>`
+          )
+          .join("")
+      : "<p>没有检出六类已知钢材缺陷。</p>";
+    $("yolo-detections").innerHTML = `
+      <h3>检测到 ${data.count} 个缺陷框</h3>
+      ${rows}
+      <p>CPU 推理 ${data.inference_ms.toFixed(1)} ms</p>
+      <p>${escapeHtml(data.notice)}</p>
+    `;
+    $("yolo-result").classList.remove("hidden");
+    $("yolo-status").textContent = "检测完成。";
+  } catch (err) {
+    $("yolo-status").textContent = String(err.message || err);
+  } finally {
+    button.disabled = false;
+  }
+}
+
 async function loadScenarios() {
   const res = await fetch("/api/scenarios");
   const data = await res.json();
@@ -226,6 +276,8 @@ function drawChart(canvas, t, y, injected, tMark) {
 }
 
 $("run").addEventListener("click", runLot);
+$("yolo-run").addEventListener("click", runYolo);
+loadYoloStatus().catch((err) => ($("yolo-status").textContent = String(err)));
 loadScenarios().catch((err) => setStatus(String(err)));
 window.addEventListener("resize", () => {
   if (current) renderCharts();

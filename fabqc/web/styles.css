@@ -34,6 +34,18 @@ button.ok { background: var(--ok); color: #062318; }
 button.no { background: transparent; color: var(--bad); border: 1px solid var(--bad); }
 .status { margin: 0; width: 100%; color: var(--muted); font-size: 13px; }
 
+.real-yolo { margin: 24px 0; padding: 16px; border: 1px solid #275c4b; background: #14251f; border-radius: 12px; }
+.section-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.real-pill { background: #123e30; color: #62d6a8; border: 1px solid #28795e; border-radius: 999px; padding: 5px 10px; font-size: 12px; white-space: nowrap; }
+.upload-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.upload-row input { flex: 1; min-width: 220px; color: var(--muted); }
+.upload-row .status { width: auto; flex-basis: 100%; }
+.yolo-result { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; margin-top: 16px; }
+.yolo-result figure img { max-height: 430px; object-fit: contain; }
+.detection-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.divider { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; color: var(--muted); font-size: 12px; }
+.divider::before, .divider::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+
 .hidden { display: none !important; }
 .board { margin-top: 24px; display: flex; flex-direction: column; gap: 22px; }
 h2 { font-size: 18px; margin: 0 0 6px; }
@@ -76,5 +88,5 @@ figure img { width: 100%; border-radius: 8px; background: #000; display: block; 
 .chart canvas { width: 100%; height: 92px; display: block; }
 
 @media (max-width: 900px) {
-  .steps, .workspace, .photos { grid-template-columns: 1fr; }
+  .steps, .workspace, .photos, .yolo-result { grid-template-columns: 1fr; }
 }
