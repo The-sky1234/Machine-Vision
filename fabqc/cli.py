@@ -12,6 +12,10 @@ def main(argv: list[str] | None = None) -> int:
     ev.add_argument("--out", default="results")
     ev.add_argument("--seed", type=int, default=7)
 
+    serve = sub.add_parser("serve", help="Open the inspection console in a browser")
+    serve.add_argument("--host", default="127.0.0.1")
+    serve.add_argument("--port", type=int, default=8765)
+
     args = parser.parse_args(argv)
     if args.cmd == "eval":
         from fabqc.eval.run import run
@@ -24,6 +28,11 @@ def main(argv: list[str] | None = None) -> int:
             "disclaimer": report["disclaimer"],
         }
         print(json.dumps(summary, indent=2))
+        return 0
+    if args.cmd == "serve":
+        import uvicorn
+
+        uvicorn.run("fabqc.webapp:app", host=args.host, port=args.port, reload=False)
         return 0
     return 1
 

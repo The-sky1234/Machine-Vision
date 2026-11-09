@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>产线质检台</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>产线质检台</h1>
+      <p class="lead">相机先看零件有没有坏，再对照当时的设备曲线找原因。改机器必须你点头。</p>
+    </div>
+    <span class="pill">模拟数据 · 不是真实工厂</span>
+  </header>
+
+  <ol class="steps">
+    <li><b>1</b> 拍照，看有没有瑕疵</li>
+    <li><b>2</b> 把瑕疵时间和设备曲线对齐，机器必须先出问题</li>
+    <li><b>3</b> 拿不准就说不知道；改参数要人批准</li>
+  </ol>
+
+  <section class="controls">
+    <label>
+      这一批发生了什么（演习脚本）
+      <select id="scenario"></select>
+    </label>
+    <button type="button" id="run">开始检查这一批</button>
+    <p id="status" class="status">点按钮后，大约要等几秒：系统在拍图、对照设备数据。</p>
+  </section>
+
+  <main id="board" class="board hidden">
+    <section class="strip-wrap">
+      <h2>本批 16 片</h2>
+      <p class="hint">红点是相机认为有问题的。点一片，下面会打开它的照片和曲线。</p>
+      <div id="strip" class="strip"></div>
+    </section>
+
+    <section class="workspace">
+      <div class="photos">
+        <figure>
+          <figcaption>零件照片</figcaption>
+          <img id="photo" alt="零件照片" />
+        </figure>
+        <figure>
+          <figcaption>异常热力图（越亮越不像正常）</figcaption>
+          <img id="overlay" alt="热力图" />
+        </figure>
+      </div>
+      <aside class="verdict" id="verdict"></aside>
+    </section>
+
+    <section>
+      <h2>当时设备在干什么</h2>
+      <p class="hint">橙色带子是演习里注入的故障时段。红虚线是当前这片零件做完的时刻。原因必须出现在红线左边。</p>
+      <div id="charts" class="charts"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

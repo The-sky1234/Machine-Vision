@@ -10,10 +10,12 @@ dependencies = [
     "matplotlib>=3.8",
     "torch>=2.2",
     "torchvision>=0.17",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "httpx>=0.27"]
 
 [project.scripts]
 fabqc = "fabqc.cli:main"
@@ -24,6 +26,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["fabqc*"]
+
+[tool.setuptools.package-data]
+fabqc = ["web/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
