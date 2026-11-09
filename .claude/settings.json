@@ -1,5 +1,0 @@
-{
-  "enabledPlugins": {
-    "mongodb@claude-plugins-official": true
-  }
-}
