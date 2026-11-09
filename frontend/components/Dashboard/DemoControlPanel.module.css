@@ -1,0 +1,580 @@
+/* Compact Panel Design */
+.compactPanel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 104, 74, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  height: auto;
+  min-height: 60px;
+}
+
+.compactContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Left Section - Status & Control */
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 auto;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.demoLabel {
+  background: rgba(253, 184, 19, 0.15);
+  color: #8B6914;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.activeIndicator {
+  color: #00684a;
+  font-weight: 600;
+  font-size: 13px;
+  animation: pulse 2s infinite;
+}
+
+.inactiveIndicator {
+  color: #9CA3AF;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.rateInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #5A6C7D;
+  padding: 6px 12px;
+  background: rgba(0, 104, 74, 0.05);
+  border-radius: 6px;
+}
+
+.separator {
+  color: #C9D0D6;
+}
+
+.compactToggle {
+  padding: 6px 16px !important;
+  font-size: 13px !important;
+  min-width: 70px;
+  height: 32px !important;
+}
+
+/* Right Section - AI Toggle & Excursion Injection */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* AI Toggle Container */
+.aiToggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(0, 104, 74, 0.05);
+  border-radius: 6px;
+}
+
+.aiLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--foreground);
+  white-space: nowrap;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(0, 104, 74, 0.15);
+}
+
+.injectionControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valueInputGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 104, 74, 0.03);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 104, 74, 0.15);
+}
+
+.compactInput {
+  padding: 6px 8px;
+  border: 1px solid #D1D5DB;
+  border-radius: 4px;
+  background: white;
+  font-size: 13px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  width: 80px;
+  height: 28px;
+  text-align: right;
+  transition: all 0.2s;
+}
+
+.compactInput:hover:not(:disabled) {
+  border-color: #00684a;
+}
+
+.compactInput:focus {
+  outline: none;
+  border-color: #00684a;
+  box-shadow: 0 0 0 2px rgba(0, 104, 74, 0.1);
+}
+
+.compactInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #F9FAFB;
+}
+
+.unitLabel {
+  font-size: 12px;
+  color: #5A6C7D;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: left;
+}
+
+.compactSelect {
+  padding: 6px 10px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  background: white;
+  font-size: 13px;
+  min-width: 90px;
+  height: 32px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.compactSelect:hover:not(:disabled) {
+  border-color: #00684a;
+}
+
+.compactSelect:focus {
+  outline: none;
+  border-color: #00684a;
+  box-shadow: 0 0 0 2px rgba(0, 104, 74, 0.1);
+}
+
+.compactSelect:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #F9FAFB;
+}
+
+.compactInject {
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  height: 32px !important;
+}
+
+.compactSuccess {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #00684a;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  animation: successPop 0.3s ease;
+}
+
+@keyframes successPop {
+  0% { transform: translateY(-50%) scale(0); }
+  50% { transform: translateY(-50%) scale(1.1); }
+  100% { transform: translateY(-50%) scale(1); }
+}
+
+/* Error Display */
+.compactError {
+  position: absolute;
+  bottom: -24px;
+  left: 16px;
+  right: 16px;
+  background: rgba(220, 56, 45, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-5px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .compactContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .leftSection {
+    justify-content: space-between;
+  }
+
+  .rightSection {
+    justify-content: flex-start;
+  }
+}
+
+/* Legacy styles for fallback */
+.panel {
+  display: none;
+}
+
+/* ========================================
+   AGENTIC AI MODE STYLES
+   ======================================== */
+
+.agenticContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Scenario Selection Section */
+.scenarioSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.scenarioLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--foreground);
+  white-space: nowrap;
+  padding: 6px 10px;
+  background: rgba(0, 104, 74, 0.08);
+  border-radius: 6px;
+}
+
+.scenarioSelect {
+  padding: 8px 12px;
+  border: 2px solid #00684a;
+  border-radius: 6px;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 180px;
+  height: 36px;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: #1e2d3d;
+}
+
+.scenarioSelect:hover:not(:disabled) {
+  border-color: #00a76a;
+  box-shadow: 0 0 0 3px rgba(0, 104, 74, 0.1);
+}
+
+.scenarioSelect:focus {
+  outline: none;
+  border-color: #00a76a;
+  box-shadow: 0 0 0 3px rgba(0, 104, 74, 0.15);
+}
+
+.scenarioSelect:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #F9FAFB;
+}
+
+/* Analysis Section */
+.analysisSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.runAnalysisButton {
+  padding: 8px 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  height: 36px !important;
+  min-width: 120px;
+}
+
+/* Pipeline Progress */
+.pipelineProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 104, 74, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00684a 0%, #00a76a 100%);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.agentStatus {
+  font-size: 12px;
+  font-weight: 600;
+  color: #00684a;
+  white-space: nowrap;
+}
+
+/* Analysis Complete */
+.analysisComplete {
+  padding: 8px 14px;
+  background: rgba(0, 237, 100, 0.1);
+  border: 1px solid rgba(0, 104, 74, 0.3);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00684a;
+  animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pipeline Error */
+.pipelineError {
+  padding: 8px 14px;
+  background: rgba(220, 56, 45, 0.1);
+  border: 1px solid rgba(220, 56, 45, 0.3);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #DC382D;
+  animation: fadeInScale 0.3s ease;
+}
+
+.compactReset {
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  height: 32px !important;
+}
+
+/* Responsive adjustments for Agentic AI mode */
+@media (max-width: 1200px) {
+  .agenticContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .scenarioSection {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .scenarioSelect {
+    width: 100%;
+  }
+
+  .analysisSection {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pipelineProgress {
+    min-width: 100%;
+  }
+}
+
+/* Lot Processing Progress Styles */
+.lotProgressSection {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 104, 74, 0.1);
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00684a;
+}
+
+.progressTime {
+  color: #556268;
+  font-weight: 500;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 104, 74, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00684a 0%, #00ed64 100%);
+  border-radius: 4px;
+  transition: width 1s linear;
+  box-shadow: 0 0 8px rgba(0, 237, 100, 0.3);
+}
+
+.excursionWarning {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: rgba(253, 184, 19, 0.15);
+  border: 1px solid rgba(253, 184, 19, 0.3);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8B6914;
+  animation: fadeInScale 0.3s ease;
+}
+
+/* ========================================
+   INJECTION FLOW STYLES
+   ======================================== */
+
+.injectionFlowContainer {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 104, 74, 0.08);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.injectionFlow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 12px;
+}
+
+.flowStage {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+}
+
+.flowStageIcon {
+  color: #00684a;
+  flex-shrink: 0;
+}
+
+.flowStageText {
+  font-size: 12px;
+  font-weight: 500;
+  color: #5A6C7D;
+  white-space: nowrap;
+}
+
+.flowFadeIn {
+  animation: flowFadeIn 0.2s ease forwards;
+}
+
+@keyframes flowFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive: Stack vertically on smaller screens */
+@media (max-width: 768px) {
+  .injectionFlow {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+}
