@@ -1,0 +1,29 @@
+{
+  "dataset": "NEU-DET official images; deterministic 80/10/10 split, seed 42",
+  "model": "yolo11n.pt",
+  "epochs": 20,
+  "image_size": 256,
+  "test_images": 180,
+  "precision": 0.6556602231477787,
+  "recall": 0.6840811900374982,
+  "map50": 0.7164357579237209,
+  "map50_95": 0.4123537254157388,
+  "per_class_map50_95": {
+    "crazing": 0.1161478644125653,
+    "inclusion": 0.4285621245306836,
+    "patches": 0.575408880433534,
+    "pitted_surface": 0.5365597177584885,
+    "rolled-in_scale": 0.2315614839300426,
+    "scratches": 0.5858822814291186
+  },
+  "speed_ms_per_image": {
+    "preprocess": 0.09418025555937169,
+    "inference": 3.8356916277835906,
+    "postprocess": 0.2971133611077272
+  },
+  "hardware": "CPU",
+  "license_notes": {
+    "dataset": "NEU-DET publisher states no explicit license; research use only.",
+    "ultralytics": "AGPL-3.0 package; commercial closed-source use needs a compatible license."
+  }
+}

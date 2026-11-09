@@ -1,0 +1,54 @@
+{
+  "dataset": "NEU-DET",
+  "source": "Northeastern University surface defect database",
+  "license": "No license stated by dataset publisher; research use only.",
+  "seed": 42,
+  "classes": [
+    "crazing",
+    "inclusion",
+    "patches",
+    "pitted_surface",
+    "rolled-in_scale",
+    "scratches"
+  ],
+  "splits": {
+    "train": {
+      "images": 1440,
+      "boxes": 3320,
+      "boxes_by_class": {
+        "crazing": 554,
+        "patches": 700,
+        "inclusion": 787,
+        "pitted_surface": 348,
+        "rolled-in_scale": 491,
+        "scratches": 440
+      }
+    },
+    "val": {
+      "images": 180,
+      "boxes": 432,
+      "boxes_by_class": {
+        "crazing": 70,
+        "patches": 89,
+        "inclusion": 112,
+        "pitted_surface": 40,
+        "rolled-in_scale": 65,
+        "scratches": 56
+      }
+    },
+    "test": {
+      "images": 180,
+      "boxes": 434,
+      "boxes_by_class": {
+        "crazing": 64,
+        "patches": 91,
+        "inclusion": 111,
+        "pitted_surface": 44,
+        "rolled-in_scale": 72,
+        "scratches": 52
+      }
+    }
+  },
+  "total_images": 1800,
+  "total_boxes": 4186
+}

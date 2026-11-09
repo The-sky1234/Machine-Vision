@@ -1,0 +1,92 @@
+:root {
+  --bg: #10141c;
+  --panel: #1a2130;
+  --line: #2c3648;
+  --text: #e8edf6;
+  --muted: #9aa7bd;
+  --accent: #f0b429;
+  --bad: #e85d4c;
+  --ok: #3dbf8a;
+  --wait: #6aa6ff;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+body { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+.top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+h1 { margin: 0 0 8px; font-size: 28px; }
+.lead { margin: 0; color: var(--muted); max-width: 40em; line-height: 1.5; }
+.pill { background: #3a2a10; color: var(--accent); border: 1px solid #6a4c16; border-radius: 999px; padding: 6px 12px; font-size: 13px; white-space: nowrap; }
+
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0; list-style: none; margin: 24px 0; }
+.steps li { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; color: var(--muted); line-height: 1.45; }
+.steps b { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; background: var(--accent); color: #1a1408; margin-right: 6px; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.controls label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 13px; flex: 1; min-width: 260px; }
+select, button { font: inherit; }
+select { background: #0f141d; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+button { background: var(--accent); color: #1a1408; border: 0; border-radius: 8px; padding: 10px 18px; font-weight: 700; cursor: pointer; }
+button:disabled { opacity: 0.55; cursor: wait; }
+button.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); font-weight: 600; }
+button.ok { background: var(--ok); color: #062318; }
+button.no { background: transparent; color: var(--bad); border: 1px solid var(--bad); }
+.status { margin: 0; width: 100%; color: var(--muted); font-size: 13px; }
+
+.real-yolo { margin: 24px 0; padding: 16px; border: 1px solid #275c4b; background: #14251f; border-radius: 12px; }
+.section-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.real-pill { background: #123e30; color: #62d6a8; border: 1px solid #28795e; border-radius: 999px; padding: 5px 10px; font-size: 12px; white-space: nowrap; }
+.upload-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.upload-row input { flex: 1; min-width: 220px; color: var(--muted); }
+.upload-row .status { width: auto; flex-basis: 100%; }
+.yolo-result { display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px; margin-top: 16px; }
+.yolo-result figure img { max-height: 430px; object-fit: contain; }
+.detection-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.divider { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; color: var(--muted); font-size: 12px; }
+.divider::before, .divider::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+
+.hidden { display: none !important; }
+.board { margin-top: 24px; display: flex; flex-direction: column; gap: 22px; }
+h2 { font-size: 18px; margin: 0 0 6px; }
+.hint { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+
+.strip { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; max-width: 640px; }
+.die { width: 100%; aspect-ratio: 1; border-radius: 10px; border: 2px solid var(--line); padding: 0; background: #0b0f16; cursor: pointer; position: relative; overflow: hidden; }
+.die img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.die.flagged { border-color: var(--bad); }
+.die.selected { outline: 2px solid var(--accent); }
+.die .dot { position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+.die.flagged .dot { background: var(--bad); }
+
+.workspace { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+.photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+figcaption { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+figure img { width: 100%; border-radius: 8px; background: #000; display: block; }
+
+.verdict { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.verdict h3 { margin: 0 0 8px; font-size: 16px; }
+.verdict .big { font-size: 22px; margin: 0 0 12px; }
+.verdict .big.bad { color: var(--bad); }
+.verdict .big.ok { color: var(--ok); }
+.verdict .big.wait { color: var(--wait); }
+.verdict p { color: var(--muted); line-height: 1.55; margin: 0 0 10px; white-space: pre-wrap; }
+.scores { list-style: none; padding: 0; margin: 0 0 14px; }
+.scores li { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.bar { height: 6px; background: #0f141d; border-radius: 99px; overflow: hidden; width: 90px; }
+.bar > span { display: block; height: 100%; background: var(--accent); }
+.drill { font-size: 12px; color: var(--accent); background: #2a220e; border-radius: 8px; padding: 8px 10px; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.stamp { display: inline-block; margin-top: 8px; font-weight: 700; }
+.stamp.approved { color: var(--ok); }
+.stamp.rejected { color: var(--bad); }
+
+.charts { display: grid; gap: 10px; }
+.chart { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px 6px; }
+.chart .name { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.chart canvas { width: 100%; height: 92px; display: block; }
+
+@media (max-width: 900px) {
+  .steps, .workspace, .photos, .yolo-result { grid-template-columns: 1fr; }
+}

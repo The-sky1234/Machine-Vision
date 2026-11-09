@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>产线质检台</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>产线质检台</h1>
+      <p class="lead">真实钢材图片用 YOLO 检测；设备归因需要时序数据，下面的归因部分是明确标注的演习。</p>
+    </div>
+    <span class="pill">YOLO 真实图 · RCA 模拟</span>
+  </header>
+
+  <ol class="steps">
+    <li><b>1</b> YOLO 在真实钢材图上框出缺陷</li>
+    <li><b>2</b> 有设备时序时才做归因，机器必须先出问题</li>
+    <li><b>3</b> 拿不准就说不知道；改参数要人批准</li>
+  </ol>
+
+  <section class="real-yolo">
+    <div class="section-title">
+      <div>
+        <h2>真实钢材图片 · YOLO 检测</h2>
+        <p class="hint">YOLO11n 用 NEU-DET 的 1800 张真实热轧钢照片训练。上传钢材表面照片，会框出六类缺陷。</p>
+      </div>
+      <span class="real-pill">真实图片模型</span>
+    </div>
+    <div class="upload-row">
+      <input id="yolo-file" type="file" accept="image/jpeg,image/png,image/webp" />
+      <button type="button" id="yolo-run">用 YOLO 检查图片</button>
+      <span id="yolo-status" class="status">检查模型状态中…</span>
+    </div>
+    <div id="yolo-result" class="yolo-result hidden">
+      <figure>
+        <figcaption>YOLO 检测结果</figcaption>
+        <img id="yolo-image" alt="YOLO 检测结果" />
+      </figure>
+      <aside id="yolo-detections" class="verdict"></aside>
+    </div>
+  </section>
+
+  <div class="divider"><span>下面是设备归因演习（模拟数据）</span></div>
+
+  <section class="controls">
+    <label>
+      这一批发生了什么（演习脚本）
+      <select id="scenario"></select>
+    </label>
+    <button type="button" id="run">开始检查这一批</button>
+    <p id="status" class="status">点按钮后，大约要等几秒：系统在拍图、对照设备数据。</p>
+  </section>
+
+  <main id="board" class="board hidden">
+    <section class="strip-wrap">
+      <h2>本批 16 片</h2>
+      <p class="hint">红点是相机认为有问题的。点一片，下面会打开它的照片和曲线。</p>
+      <div id="strip" class="strip"></div>
+    </section>
+
+    <section class="workspace">
+      <div class="photos">
+        <figure>
+          <figcaption>零件照片</figcaption>
+          <img id="photo" alt="零件照片" />
+        </figure>
+        <figure>
+          <figcaption>异常热力图（越亮越不像正常）</figcaption>
+          <img id="overlay" alt="热力图" />
+        </figure>
+      </div>
+      <aside class="verdict" id="verdict"></aside>
+    </section>
+
+    <section>
+      <h2>当时设备在干什么</h2>
+      <p class="hint">橙色带子是演习里注入的故障时段。红虚线是当前这片零件做完的时刻。原因必须出现在红线左边。</p>
+      <div id="charts" class="charts"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
