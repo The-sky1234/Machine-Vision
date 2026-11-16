@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "name": "sample_01",
+  "source": "synthetic_pinhole",
+  "topics": {
+    "color": "/camera/color",
+    "depth": "/camera/depth",
+    "info": "/camera/info"
+  },
+  "encodings": {
+    "rgb": "png rgb8",
+    "depth": "png uint16 millimeters, 0 is invalid",
+    "segmentation": "png uint8 instance id, 0 is background"
+  },
+  "camera": {
+    "width": 320,
+    "height": 240,
+    "fx": 300.0,
+    "fy": 300.0,
+    "cx": 160.0,
+    "cy": 120.0,
+    "distortion": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "distortion_model": "plumb_bob",
+    "optical_frame": "camera_color_optical_frame"
+  },
+  "table": {
+    "z_m": 0.9,
+    "half_extent_m": [
+      0.34,
+      0.26
+    ]
+  },
+  "objects": [
+    {
+      "id": 1,
+      "name": "green_box",
+      "position_m": [
+        0.02,
+        -0.02,
+        0.86
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.24192189559966773,
+        0.9702957262759965
+      ],
+      "size_m": [
+        0.12,
+        0.06,
+        0.08
+      ],
+      "color_rgb": [
+        46,
+        160,
+        78
+      ]
+    },
+    {
+      "id": 2,
+      "name": "yellow_box",
+      "position_m": [
+        -0.12,
+        0.09,
+        0.875
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        -0.15643446504023087,
+        0.9876883405951378
+      ],
+      "size_m": [
+        0.05,
+        0.05,
+        0.05
+      ],
+      "color_rgb": [
+        214,
+        176,
+        48
+      ]
+    }
+  ]
+}
