@@ -3,4 +3,5 @@ __pycache__/
 *.py[cod]
 outputs/
 *.pt
+!pcb/weights/baseline_fpn_loss.pt
 runs/
