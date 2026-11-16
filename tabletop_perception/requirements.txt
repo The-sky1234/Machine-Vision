@@ -1,0 +1,4 @@
+# Projection check without a ROS 2 install. A ROS workspace can use python3-opencv instead.
+numpy>=1.24
+opencv-python-headless>=4.8
+pytest>=7
